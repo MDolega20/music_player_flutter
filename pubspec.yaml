@@ -12,7 +12,6 @@ dependencies:
 
   cupertino_icons: ^0.1.2
   scoped_model:
-  flute_music_player:
 
 dev_dependencies:
   flutter_test:
