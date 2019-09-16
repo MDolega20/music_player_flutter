@@ -37,20 +37,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    if(!ScopedModel.of<MusicModel>(context).loading && ScopedModel.of<MusicModel>(context).error == null){
+      return _placeholder(context);
+    }else{
+      return _build(context);
+    }
+  }
+
+  Widget _build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
         title: Text("List of songs"),
       ),
       body: ScopedModelDescendant<MusicModel>(
-          builder: (context, child, model) => AnnotatedRegion<SystemUiOverlayStyle>(
-          child: ListView.builder(itemCount: model.all.length,
+        builder: (context, child, model) => AnnotatedRegion<SystemUiOverlayStyle>(
+          child: ListView.builder(itemCount: model.songs.length,
               itemBuilder: (context, index){
-            final item = model.all[index];
-              return Text(item.title);
-          })
-        ,
+                final item = model.songs[index];
+                return Text(item.title);
+              })
+          ,
         ),
       ),
     );
+  }
+  Widget _placeholder(BuildContext context){
+    return Text("LOADING");
   }
 }
