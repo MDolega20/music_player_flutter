@@ -7,8 +7,8 @@ import 'package:scoped_model/scoped_model.dart';
 
 class MusicModel extends Model{
   Track _song;
-  List<Track> songs = [];
-  bool loading = false;
+  List<Track> tracks = [];
+  bool loading = true;
   String error;
 
   void findSounds() {
@@ -21,7 +21,7 @@ class MusicModel extends Model{
       Track(title:"Nazwa utworu 5", author:"Autor", assetName:"track01.mp3", assetFolder: "music"),
     ];
 
-    songs = _tracks;
+    tracks = _tracks;
 
     loading = false;
     notifyListeners();

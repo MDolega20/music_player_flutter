@@ -34,11 +34,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if(!ScopedModel.of<MusicModel>(context).loading && ScopedModel.of<MusicModel>(context).error == null){
-      return _placeholder(context);
-    }else{
-      return _build(context);
-    }
+    return ScopedModelDescendant<MusicModel>(
+        builder: (context, child, model) {
+          if(!ScopedModel.of<MusicModel>(context).loading && ScopedModel.of<MusicModel>(context).error == null){
+            return _placeholder(context);
+          }else{
+            return _build(context);
+          }
+        }
+    );
+
   }
 
   Widget _build(BuildContext context){
@@ -48,9 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ScopedModelDescendant<MusicModel>(
         builder: (context, child, model) => AnnotatedRegion<SystemUiOverlayStyle>(
-          child: ListView.builder(itemCount: model.songs.length,
+          child: ListView.builder(itemCount: model.tracks.length,
               itemBuilder: (context, index){
-                final item = model.songs[index];
+                final item = model.tracks[index];
                 return Text(item.title);
               })
           ,
@@ -59,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
   Widget _placeholder(BuildContext context){
+    //TODO loading screen
     return Text("LOADING");
   }
 }
