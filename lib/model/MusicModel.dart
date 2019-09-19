@@ -50,15 +50,19 @@ class MusicModel extends Model {
   }
 
   void playTrack(Track _track) {
-    if (track != null) {
+    if (track != null || track != _track) {
       track = _track;
-    }
 
-    assetsAudioPlayer.open(AssetsAudio(
-      asset: _track.assetName,
-      folder: "assets/${_track.assetFolder}/",
-    ));
+      assetsAudioPlayer.stop();
+
+      assetsAudioPlayer.open(AssetsAudio(
+        asset: _track.assetName,
+        folder: "assets/${_track.assetFolder}/",
+      ));
+    }
     assetsAudioPlayer.play();
+
+
 
     notifyListeners();
   }
