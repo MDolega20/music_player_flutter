@@ -23,8 +23,8 @@ class MusicModel extends Model{
 
     songs = _tracks;
 
-    songs.forEach((item) => print(item.title));
-    print(loading);
+//    songs.forEach((item) => print(item.title));
+//    print(loading);
     loading = false;
     print(loading);
     notifyListeners();
