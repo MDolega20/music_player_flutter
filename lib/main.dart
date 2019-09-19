@@ -31,39 +31,38 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<MusicModel>(
-        builder: (context, child, model) {
-          if(!model.loading && model.error == null){
-            return _placeholder(context);
-          }else{
-            return _build(context);
-          }
-        }
-    );
-
+    return ScopedModelDescendant<MusicModel>(builder: (context, child, model) {
+      if (model.loading && model.error == null) {
+        return _placeholder(context);
+      } else {
+        return _build(context);
+      }
+    });
   }
 
-  Widget _build(BuildContext context){
+  Widget _build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("List of songs"),
       ),
       body: ScopedModelDescendant<MusicModel>(
-        builder: (context, child, model) => AnnotatedRegion<SystemUiOverlayStyle>(
-          child: ListView.builder(itemCount: model.tracks.length,
-              itemBuilder: (context, index){
+        builder: (context, child, model) =>
+            AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.dark,
+          child: ListView.builder(
+              itemCount: model.tracks.length,
+              itemBuilder: (context, index) {
                 final item = model.tracks[index];
                 return Text(item.title);
-              })
-          ,
+              }),
         ),
       ),
     );
   }
-  Widget _placeholder(BuildContext context){
+
+  Widget _placeholder(BuildContext context) {
     //TODO loading screen
     return Text("LOADING");
   }
