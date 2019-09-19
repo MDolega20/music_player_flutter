@@ -11,7 +11,7 @@ class MusicModel extends Model{
   bool loading = false;
   String error;
 
-  void findSounds() async {
+  void findSounds() {
     loading = true;
     List<Track> _tracks = [
       Track(title:"Nazwa utworu 1", author:"Autor", assetName:"track01.mp3", assetFolder: "music"),
@@ -23,10 +23,7 @@ class MusicModel extends Model{
 
     songs = _tracks;
 
-//    songs.forEach((item) => print(item.title));
-//    print(loading);
     loading = false;
-    print(loading);
     notifyListeners();
   }
 }
