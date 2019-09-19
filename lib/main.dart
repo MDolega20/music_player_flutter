@@ -9,8 +9,11 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final model = MusicModel();
+    model.findSounds();
+
     return ScopedModel<MusicModel>(
-      model: MusicModel(),
+      model: model,
       child: MaterialApp(
         title: 'Music player',
         theme: ThemeData(
@@ -28,12 +31,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  void initState() {
-    super.initState();
-    ScopedModel.of<MusicModel>(context).findSounds();
-  }
 
   @override
   Widget build(BuildContext context) {
