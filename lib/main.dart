@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<MusicModel>(
         builder: (context, child, model) {
-          if(!ScopedModel.of<MusicModel>(context).loading && ScopedModel.of<MusicModel>(context).error == null){
+          if(!model.loading && model.error == null){
             return _placeholder(context);
           }else{
             return _build(context);
