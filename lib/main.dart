@@ -43,27 +43,83 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("List of songs"),
-      ),
-      body: ScopedModelDescendant<MusicModel>(
-        builder: (context, child, model) =>
-            AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.dark,
-          child: ListView.builder(
-              itemCount: model.tracks.length,
-              itemBuilder: (context, index) {
-                final item = model.tracks[index];
-                return Text(item.title);
-              }),
-        ),
-      ),
-    );
+    return ScopedModelDescendant<MusicModel>(
+        builder: (context, child, model) => Scaffold(
+              appBar: AppBar(
+                title: Text("All songs"),
+                actions: <Widget>[
+                  InkWell(
+                    onTap: () => model.stopTrack(),
+                    child: Icon(Icons.stop),
+                  )
+                ],
+              ),
+              body: AnnotatedRegion<SystemUiOverlayStyle>(
+                value: SystemUiOverlayStyle.dark,
+                child: Stack(
+                  children: <Widget>[
+                    _tracks(context, model),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 5, top: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text("X")
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ));
   }
 
   Widget _placeholder(BuildContext context) {
     //TODO loading screen
     return Text("LOADING");
+  }
+
+  Widget _tracks(BuildContext context, model) {
+    return ListView.builder(
+        itemCount: model.tracks.length,
+        itemBuilder: (context, index) {
+          final item = model.tracks[index];
+          return GestureDetector(
+            onTap: () => model.playTrack(item),
+            child: Padding(
+              padding: EdgeInsets.only(left: 10, right: 10, top: 4, bottom: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        item.title,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      SizedBox(
+                        height: 3,
+                      ),
+                      Text(
+                        item.author,
+//                                    style: TextStyle(fontSize: 20),
+                      )
+                    ],
+                  ),
+                  InkWell(
+                    child: Icon(Icons.menu),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
