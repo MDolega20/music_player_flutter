@@ -68,7 +68,38 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text("X")
+                            InkWell(
+                              child: Icon(
+                                Icons.arrow_left,
+                                size: 50,
+                              ),
+                              onTap: () {}, //TODO preverius track
+                            ),
+                            InkWell(
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Colors.grey,
+                                      width: 2.5,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.pause,
+                                      size: 60,
+                                    ),
+                                  )),
+                              onTap: () => model.stopTrack(),
+                            ),
+                            InkWell(
+                              child: Icon(
+                                Icons.arrow_right,
+                                size: 50,
+                              ),
+                              onTap: () {}, //TODO next track
+                            ),
                           ],
                         ),
                       ),
