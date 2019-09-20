@@ -10,6 +10,7 @@ class MusicModel extends Model {
   List<Track> favourite = [];
   bool loading = true;
   String error;
+  bool isPlaying = false;
 
   final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
 
@@ -54,6 +55,7 @@ class MusicModel extends Model {
       track = _track;
 
       assetsAudioPlayer.stop();
+      isPlaying = false;
 
       assetsAudioPlayer.open(AssetsAudio(
         asset: _track.assetName,
@@ -61,6 +63,7 @@ class MusicModel extends Model {
       ));
     }
     assetsAudioPlayer.play();
+    isPlaying = true;
 
 
 
@@ -75,8 +78,11 @@ class MusicModel extends Model {
 //      final songDuration = playingAudio.duration;
 //    });
 
-    assetsAudioPlayer.pause();
+    assetsAudioPlayer.playOrPause();
+    isPlaying = false;
   }
+
+
 }
 
 class Track {

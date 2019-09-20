@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 Icons.arrow_left,
                                 size: 50,
                               ),
-                              onTap: () {}, //TODO preverius track
+                              onTap: () {}, //TODO preverious track
                             ),
                             InkWell(
                               child: Container(
@@ -87,7 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Icon(
-                                      Icons.pause,
+                                      model.isPlaying ? Icons.pause : Icons.play_arrow
+                                      , //TODO icon change
                                       size: 60,
                                     ),
                                   )),
