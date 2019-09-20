@@ -79,7 +79,8 @@ class MusicModel extends Model {
 //    });
 
     assetsAudioPlayer.playOrPause();
-    isPlaying = false;
+    isPlaying = !isPlaying;
+    notifyListeners();
   }
 
 

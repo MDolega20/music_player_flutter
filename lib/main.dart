@@ -121,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
         itemCount: model.tracks.length,
         itemBuilder: (context, index) {
           final item = model.tracks[index];
-          return GestureDetector(
+          return GestureDetector( //TODO  recognize gestures on text or icon but not on background
             onTap: () => model.playTrack(item),
             child: Padding(
               padding: EdgeInsets.only(left: 10, right: 10, top: 4, bottom: 5),
