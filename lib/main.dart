@@ -196,7 +196,6 @@ class ControlsBottom extends StatelessWidget {
       child: Column(
         children: <Widget>[
           _current(context, model),
-          Text("wwww"),
           Padding(
             padding: EdgeInsets.only(bottom: 5, top: 5),
             child: Row(
@@ -248,12 +247,12 @@ class ControlsBottom extends StatelessWidget {
         padding: EdgeInsets.only(left: 5, right: 5, top: 3, bottom: 3),
         child: Row(
           children: <Widget>[
-            Text(model.track.title),
+            Text(model.track.title)
           ],
         ),
       );
     }
-    return null;
+    return Container();
   }
 }
 
