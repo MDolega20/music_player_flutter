@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 Icons.arrow_left,
                                 size: 50,
                               ),
-                              onTap: () {}, //TODO preverious track
+                              onTap: () => model.prevTrack(),
                             ),
                             InkWell(
                               child: Container(
@@ -88,18 +88,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Icon(
                                       model.isPlaying ? Icons.pause : Icons.play_arrow
-                                      , //TODO icon change
+                                      ,
                                       size: 60,
                                     ),
                                   )),
-                              onTap: () => model.stopTrack(),
+                              onTap: () => model.toggleTrack(),
                             ),
                             InkWell(
                               child: Icon(
                                 Icons.arrow_right,
                                 size: 50,
                               ),
-                              onTap: () {}, //TODO next track
+                              onTap: () => model.nextTrack(),
                             ),
                           ],
                         ),
@@ -122,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
         itemBuilder: (context, index) {
           final item = model.tracks[index];
           return GestureDetector( //TODO  recognize gestures on text or icon but not on background
-            onTap: () => model.playTrack(item),
+            onTap: () => model.playTrack(index),
             child: Padding(
               padding: EdgeInsets.only(left: 10, right: 10, top: 4, bottom: 5),
               child: Row(
