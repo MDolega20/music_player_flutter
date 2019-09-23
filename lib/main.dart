@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<MusicModel>(builder: (context, child, model) {
@@ -40,8 +39,7 @@ class MyHomePage extends StatelessWidget {
 
   Widget _build(BuildContext context) {
     return ScopedModelDescendant<MusicModel>(
-        builder: (context, child, model) =>
-            Scaffold(
+        builder: (context, child, model) => Scaffold(
               appBar: AppBar(
                 title: Text("All songs"),
                 actions: <Widget>[
@@ -102,8 +100,7 @@ class MyHomePage extends StatelessWidget {
           );
         });
   }
-
-}
+} //NOT USED
 
 class Library extends StatelessWidget {
   @override
@@ -119,17 +116,8 @@ class Library extends StatelessWidget {
 
   Widget _build(BuildContext context) {
     return ScopedModelDescendant<MusicModel>(
-        builder: (context, child, model) =>
-            Scaffold(
-              appBar: AppBar(
-                title: Text("Library"),
-                actions: <Widget>[
-                  InkWell(
-                    onTap: () => model.stopTrack(),
-                    child: Icon(Icons.stop),
-                  )
-                ],
-              ),
+        builder: (context, child, model) => Scaffold(
+              appBar: AppBar(title: Text("Library")),
               body: AnnotatedRegion<SystemUiOverlayStyle>(
                 value: SystemUiOverlayStyle.dark,
                 child: Stack(
@@ -147,35 +135,43 @@ class Library extends StatelessWidget {
         itemCount: model.tracks.length,
         itemBuilder: (context, index) {
           final item = model.tracks[index];
+          final isPlayed = item == model.track ? true : false;
+
           return GestureDetector(
             //TODO  recognize gestures on text or icon but not on background
             onTap: () => model.playTrack(index),
-            child: Padding(
-              padding: EdgeInsets.only(left: 10, right: 10, top: 4, bottom: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        item.title,
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Text(
-                        item.author,
+            child: Container(
+              child: Padding(
+                padding:
+                    EdgeInsets.only(left: 10, right: 10, top: 4, bottom: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          item.title,
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight:
+                                  isPlayed ? FontWeight.w600 : FontWeight.w400), //TODO temporary
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Text(
+                          item.author,
 //                                    style: TextStyle(fontSize: 20),
-                      )
-                    ],
-                  ),
-                  InkWell(
-                    child: Icon(Icons.menu),
-                  ),
-                ],
+                        )
+                      ],
+                    ),
+                    InkWell(
+                      child: Icon(Icons.menu),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
@@ -236,6 +232,21 @@ class ControlsBottom extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class AppBarCustom extends StatelessWidget{  //TODO in progress
+  final title;
+  final actions; // <Widget>[]
+
+  AppBarCustom({@required this.title, this.actions});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text(title),
+      actions: actions,
     );
   }
 }
