@@ -155,8 +155,9 @@ class Library extends StatelessWidget {
                           item.title,
                           style: TextStyle(
                               fontSize: 18,
-                              fontWeight:
-                                  isPlayed ? FontWeight.w600 : FontWeight.w400), //TODO temporary
+                              fontWeight: isPlayed
+                                  ? FontWeight.w600
+                                  : FontWeight.w400), //TODO temporary
                         ),
                         SizedBox(
                           height: 3,
@@ -192,51 +193,72 @@ class ControlsBottom extends StatelessWidget {
       bottom: 0,
       left: 0,
       right: 0,
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 5, top: 5),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            InkWell(
-              child: Icon(
-                Icons.arrow_left,
-                size: 50,
-              ),
-              onTap: () => model.prevTrack(),
-            ),
-            InkWell(
-              child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 2.5,
-                    ),
+      child: Column(
+        children: <Widget>[
+          _current(context, model),
+          Text("wwww"),
+          Padding(
+            padding: EdgeInsets.only(bottom: 5, top: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                InkWell(
+                  child: Icon(
+                    Icons.arrow_left,
+                    size: 50,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      model.isPlaying ? Icons.pause : Icons.play_arrow,
-                      size: 60,
-                    ),
-                  )),
-              onTap: () => model.toggleTrack(),
+                  onTap: () => model.prevTrack(),
+                ),
+                InkWell(
+                  child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 2.5,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          model.isPlaying ? Icons.pause : Icons.play_arrow,
+                          size: 60,
+                        ),
+                      )),
+                  onTap: () => model.toggleTrack(),
+                ),
+                InkWell(
+                  child: Icon(
+                    Icons.arrow_right,
+                    size: 50,
+                  ),
+                  onTap: () => model.nextTrack(),
+                ),
+              ],
             ),
-            InkWell(
-              child: Icon(
-                Icons.arrow_right,
-                size: 50,
-              ),
-              onTap: () => model.nextTrack(),
-            ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
+
+  Widget _current(BuildContext context, model) { //TODO fix this error
+    if (model.track != null) {
+      return Padding(
+        padding: EdgeInsets.only(left: 5, right: 5, top: 3, bottom: 3),
+        child: Row(
+          children: <Widget>[
+            Text(model.track.title),
+          ],
+        ),
+      );
+    }
+    return null;
+  }
 }
 
-class AppBarCustom extends StatelessWidget{  //TODO in progress
+class AppBarCustom extends StatelessWidget {
+  //TODO in progress
   final title;
   final actions; // <Widget>[]
 
