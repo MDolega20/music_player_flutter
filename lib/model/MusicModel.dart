@@ -13,7 +13,7 @@ class MusicModel extends Model {
   String error;
   bool isPlaying = false;
 
-  final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
+  AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
 
   void findSounds() {
     loading = true;
@@ -52,7 +52,6 @@ class MusicModel extends Model {
   }
 
   void playTrack(int index) {
-    print(index);
     if (index != null && indexTrack != index) {
       if(isPlaying){
         stopTrack();
