@@ -53,14 +53,13 @@ class MusicModel extends Model {
 
   void playTrack(int index) {
     if (index != null && indexTrack != index) {
-      if(isPlaying){
+      if (isPlaying) {
         stopTrack();
       }
 
       Track _track = tracks[index];
       track = _track;
       indexTrack = index;
-
 
       assetsAudioPlayer.open(AssetsAudio(
         asset: _track.assetName,
@@ -100,8 +99,9 @@ class Track {
   String author;
   String assetName;
   String assetFolder;
-  String duration = null;
+  String duration;
   String image = "default.jpg";
+  String length;
 
   Track(
       {this.title,
@@ -109,5 +109,6 @@ class Track {
       this.assetName,
       this.assetFolder,
       this.duration,
+      this.length,
       this.image});
 }

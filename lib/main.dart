@@ -244,10 +244,13 @@ class ControlsBottom extends StatelessWidget {
   Widget _current(BuildContext context, model) { //TODO fix this error
     if (model.track != null) {
       return Padding(
-        padding: EdgeInsets.only(left: 5, right: 5, top: 3, bottom: 3),
+        padding: EdgeInsets.only(left: 15, right: 15, top: 3, bottom: 3),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(model.track.title)
+            Text(model.track.title, style: TextStyle(fontSize: 20),),
+            Text(" - ", style: TextStyle(fontSize: 20),),
+            Text(model.track.author, style: TextStyle(fontSize: 20),)
           ],
         ),
       );
