@@ -52,11 +52,17 @@ class MusicModel extends Model {
   }
 
   void playTrack(int index) {
+    print(index);
     if (index != null && indexTrack != index) {
+      if(isPlaying){
+        stopTrack();
+      }
+
       Track _track = tracks[index];
       track = _track;
       indexTrack = index;
-      stopTrack();
+
+
       assetsAudioPlayer.open(AssetsAudio(
         asset: _track.assetName,
         folder: "assets/${_track.assetFolder}/",
@@ -74,20 +80,20 @@ class MusicModel extends Model {
     notifyListeners();
   }
 
-  void stopTrack(){
+  void stopTrack() {
     assetsAudioPlayer.stop();
+//    assetsAudioPlayer.finished;
     isPlaying = false;
     notifyListeners();
   }
 
-  void nextTrack(int index){
+  void nextTrack() {
     playTrack(indexTrack + 1);
   }
-  void prevTrack(int index){
+
+  void prevTrack() {
     playTrack(indexTrack == 0 ? tracks.length - 1 : indexTrack - 1);
   }
-
-
 }
 
 class Track {
@@ -99,8 +105,7 @@ class Track {
   String image = "default.jpg";
 
   Track(
-      {
-        this.title,
+      {this.title,
       this.author,
       this.assetName,
       this.assetFolder,
